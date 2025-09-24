@@ -1,0 +1,6 @@
+@GoTournamentPlanner_HostAddress = http://localhost:5114
+
+GET {{GoTournamentPlanner_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
