@@ -47,7 +47,6 @@ public class TestBase : IDisposable
             EndDate = new DateOnly(2026, 3, 17),
             Ruleset = Ruleset.AGA,
             Organizer = player3,
-            Participants = new List<Person> { player1, player2 }
         };
         Tournament tournament2 = new Tournament
         {
@@ -56,7 +55,8 @@ public class TestBase : IDisposable
             StartDate = new DateOnly(2020, 6, 20),
             EndDate = new DateOnly(2020, 6, 22),
             Ruleset = Ruleset.Japanese,
-            Organizer = player3
+            Organizer = player3,
+            Participants = new List<Person> { player1, player2 }
         };
 
         Context.Persons.AddRange(player1, player2, player3);

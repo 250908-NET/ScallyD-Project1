@@ -45,6 +45,7 @@ public class TournamentRepositoryTests : TestBase
         Assert.Equal(new DateOnly(2020, 6, 22), result.EndDate);
         Assert.Equal(Ruleset.Japanese, result.Ruleset);
         Assert.Equal("Randomlastname", result.Organizer.Name.Family);
+        Assert.Equal("Redmond", result.Participants.First().Name.Family);
     }
 
     [Fact]
