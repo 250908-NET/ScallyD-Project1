@@ -42,6 +42,10 @@ app.UseExceptionHandler(errorApp =>
                 context.Response.StatusCode = 404;
                 await context.Response.WriteAsJsonAsync(new { error = exception.Message });
                 break;
+            case Exception:
+                context.Response.StatusCode = 500;
+                await context.Response.WriteAsJsonAsync(new { error = exception.Message });
+                break;
             default:
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsJsonAsync(new { error = "An unknown error occurred." });
