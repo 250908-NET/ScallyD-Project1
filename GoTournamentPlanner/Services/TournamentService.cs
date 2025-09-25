@@ -14,6 +14,11 @@ public class TournamentService : ITournamentService
         return await _tournamentRepository.GetAllAsync();
     }
 
+    public async Task<Tournament?> GetTournamentDetailsAsync(int id)
+    {
+        return await _tournamentRepository.GetByIdAsync(id);
+    }
+
     public async Task<Tournament> AddTournamentAsync(TournamentDto tournamentDto)
     {
         Person organizer = await _personRepository.GetByIdAsync(tournamentDto.OrganizerId)

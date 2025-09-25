@@ -73,6 +73,12 @@ app.MapPost("/tournaments", async (TournamentDto newTournament, ITournamentServi
     return Results.Created($"/tournaments/{createdTournament.Id}", createdTournament);
 });
 
+app.MapGet("/tournaments/{id}", async (int id, ITournamentService service) =>
+{
+    var tournament = await service.GetTournamentDetailsAsync(id);
+    return tournament is not null ? Results.Ok(tournament) : Results.NotFound();
+});
+
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
