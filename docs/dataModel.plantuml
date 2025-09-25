@@ -1,5 +1,7 @@
 @startuml
 
+skinparam linetype ortho
+
 entity Person {
     ID <<PK>>
     Name
