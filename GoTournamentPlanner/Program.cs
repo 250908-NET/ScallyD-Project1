@@ -22,6 +22,28 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        var exception = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>()?.Error;
+        context.Response.ContentType = "application/json";
+
+        switch (exception)
+        {
+            case BadHttpRequestException:
+            case ArgumentException:
+                context.Response.StatusCode = 400;
+                await context.Response.WriteAsJsonAsync(new { error = exception.Message });
+                break;
+            default:
+                context.Response.StatusCode = 500;
+                await context.Response.WriteAsJsonAsync(new { error = "An unknown error occurred." });
+                break;
+        }
+    });
+});
+
 app.MapGet("/players", async (IPersonService service) =>
 {
     return await service.ListAllPlayersAsync();
