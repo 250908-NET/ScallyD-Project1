@@ -7,6 +7,11 @@ public class PersonService : IPersonService
         _personRepository = personRepository;
     }
 
+    public async Task<Person?> GetPlayerProfileAsync(int playerId)
+    {
+        return await _personRepository.GetByIdAsync(playerId);
+    }
+
     public async Task<IEnumerable<Person>> ListAllPlayersAsync()
     {
         return await _personRepository.GetAllAsync();
