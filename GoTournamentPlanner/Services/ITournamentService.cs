@@ -5,4 +5,6 @@ public interface ITournamentService
     Task<Tournament?> GetTournamentDetailsAsync(int tournamentId);
 
     Task<Tournament> AddTournamentAsync(TournamentDto tournamentDto);
+
+    Task<IEnumerable<Person>> ListTournamentParticipantsAsync(int tournamentId);
 }

@@ -38,6 +38,10 @@ app.UseExceptionHandler(errorApp =>
                 context.Response.StatusCode = 400;
                 await context.Response.WriteAsJsonAsync(new { error = exception.Message });
                 break;
+            case KeyNotFoundException:
+                context.Response.StatusCode = 404;
+                await context.Response.WriteAsJsonAsync(new { error = exception.Message });
+                break;
             default:
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsJsonAsync(new { error = "An unknown error occurred." });
@@ -77,6 +81,12 @@ app.MapGet("/tournaments/{id}", async (int id, ITournamentService service) =>
 {
     var tournament = await service.GetTournamentDetailsAsync(id);
     return tournament is not null ? Results.Ok(tournament) : Results.NotFound();
+});
+
+app.MapGet("/tournaments/{id}/participants", async (int id, ITournamentService service) =>
+{
+    var participants = await service.ListTournamentParticipantsAsync(id);
+    return Results.Ok(participants);
 });
 
 app.Run();

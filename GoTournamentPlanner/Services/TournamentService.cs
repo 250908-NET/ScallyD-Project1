@@ -19,6 +19,18 @@ public class TournamentService : ITournamentService
         return await _tournamentRepository.GetByIdAsync(id);
     }
 
+    public async Task<IEnumerable<Person>> ListTournamentParticipantsAsync(int tournamentId)
+    {
+        var tournament = await _tournamentRepository.GetByIdAsync(tournamentId);
+
+        if (tournament == null)
+        {
+            throw new KeyNotFoundException("Tournament not found.");
+        }
+
+        return tournament.Participants;
+    }
+
     public async Task<Tournament> AddTournamentAsync(TournamentDto tournamentDto)
     {
         Person organizer = await _personRepository.GetByIdAsync(tournamentDto.OrganizerId)
