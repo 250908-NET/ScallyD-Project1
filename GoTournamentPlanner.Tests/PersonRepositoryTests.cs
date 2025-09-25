@@ -57,7 +57,7 @@ public class PersonRepositoryTests : TestBase
     }
 
     [Fact]
-    public async Task RegisterPlayerAsync_ShouldCreatePerson()
+    public async Task AddAsync_ShouldCreatePerson()
     {
         // Arrange
         Person newPlayer = new()
@@ -80,7 +80,7 @@ public class PersonRepositoryTests : TestBase
     }
 
     [Fact]
-    public async Task RegisterPlayerAsync_WithoutEmail_ShouldCreatePersonWithNullEmail()
+    public async Task AddAsync_WithoutEmail_ShouldCreatePersonWithNullEmail()
     {
         // Arrange
         Person newPlayer = new()
@@ -102,7 +102,7 @@ public class PersonRepositoryTests : TestBase
     }
 
     [Fact]
-    public async Task RegisterPlayerAsync_WithoutRank_ShouldCreatePersonWithNullRank()
+    public async Task AddAsync_WithoutRank_ShouldCreatePersonWithNullRank()
     {
         // Arrange
         Person newPlayer = new()
