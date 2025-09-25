@@ -27,6 +27,12 @@ app.MapGet("/players", async (IPersonService service) =>
     return await service.ListAllPlayersAsync();
 });
 
+app.MapPost("/players", async (Person newPlayer, IPersonService service) =>
+{
+    var createdPlayer = await service.RegisterPlayerAsync(newPlayer);
+    return Results.Created($"/players/{createdPlayer.Id}", createdPlayer);
+});
+
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)

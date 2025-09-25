@@ -11,4 +11,9 @@ public class PersonService : IPersonService
     {
         return await _personRepository.GetAllAsync();
     }
+    public async Task<Person> RegisterPlayerAsync(Person person)
+    {
+        await _personRepository.AddAsync(person);
+        return person;
+    }
 }
