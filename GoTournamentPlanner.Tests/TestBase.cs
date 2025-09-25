@@ -39,9 +39,28 @@ public class TestBase : IDisposable
             Email = "bob@therandomlastnamefamily.net"
         };
 
-        // TODO: Add tournaments
+        Tournament tournament1 = new Tournament
+        {
+            Name = "Spring Open 2026",
+            Location = "Baltimore, MD",
+            StartDate = new DateOnly(2026, 3, 15),
+            EndDate = new DateOnly(2026, 3, 17),
+            Ruleset = Ruleset.AGA,
+            Organizer = player3,
+            Participants = new List<Person> { player1, player2 }
+        };
+        Tournament tournament2 = new Tournament
+        {
+            Name = "Summer Open 2020",
+            Location = "Washington, D.C.",
+            StartDate = new DateOnly(2020, 6, 20),
+            EndDate = new DateOnly(2020, 6, 22),
+            Ruleset = Ruleset.Japanese,
+            Organizer = player3
+        };
 
         Context.Persons.AddRange(player1, player2, player3);
+        Context.Tournaments.AddRange(tournament1, tournament2);
 
         await Context.SaveChangesAsync();
     }
