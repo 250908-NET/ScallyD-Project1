@@ -67,6 +67,11 @@ app.MapGet("/tournaments", async (ITournamentService service) =>
 {
     return await service.ListAllTournamentsAsync();
 });
+app.MapPost("/tournaments", async (TournamentDto newTournament, ITournamentService service) =>
+{
+    var createdTournament = await service.AddTournamentAsync(newTournament);
+    return Results.Created($"/tournaments/{createdTournament.Id}", createdTournament);
+});
 
 app.Run();
 
