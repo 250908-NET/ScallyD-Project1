@@ -20,6 +20,7 @@ public class TournamentRepository : ITournamentRepository
     {
         return await _context.Tournaments
             .Include(t => t.Organizer)
+            .Include(t => t.Participants)
             .FirstOrDefaultAsync(t => t.Id == id);
     }
 
