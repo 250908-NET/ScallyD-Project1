@@ -92,6 +92,11 @@ app.MapGet("/tournaments/{id}/participants", async (int id, ITournamentService s
     var participants = await service.ListTournamentParticipantsAsync(id);
     return Results.Ok(participants);
 });
+app.MapPost("/tournaments/{tournamentId}/participants", async (int tournamentId, [FromBody] int playerId, ITournamentService service) =>
+{
+    await service.RegisterParticipantAsync(tournamentId, playerId);
+    return Results.Ok();
+});
 
 app.Run();
 

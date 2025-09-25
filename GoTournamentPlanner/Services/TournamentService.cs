@@ -49,4 +49,21 @@ public class TournamentService : ITournamentService
         await _tournamentRepository.AddAsync(tournament);
         return tournament;
     }
+
+    public async Task RegisterParticipantAsync(int tournamentId, int playerId)
+    {
+        var tournament = await _tournamentRepository.GetByIdAsync(tournamentId)
+            ?? throw new KeyNotFoundException("Tournament not found.");
+
+        var player = await _personRepository.GetByIdAsync(playerId)
+            ?? throw new KeyNotFoundException("Player not found.");
+
+        if (tournament.Participants.Any(p => p.Id == playerId))
+        {
+            throw new InvalidOperationException("Player is already registered for this tournament.");
+        }
+
+        tournament.Participants.Add(player);
+        await _tournamentRepository.UpdateAsync(tournament);
+    }
 }
