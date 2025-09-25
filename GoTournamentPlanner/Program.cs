@@ -97,6 +97,11 @@ app.MapPost("/tournaments/{tournamentId}/participants", async (int tournamentId,
     await service.RegisterParticipantAsync(tournamentId, playerId);
     return Results.Ok();
 });
+app.MapDelete("/tournaments/{tournamentId}/participants", async (int tournamentId, [FromBody] int playerId, ITournamentService service) =>
+{
+    await service.WithdrawParticipantAsync(tournamentId, playerId);
+    return Results.Ok();
+});
 
 app.Run();
 

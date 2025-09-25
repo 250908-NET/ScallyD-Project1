@@ -66,4 +66,16 @@ public class TournamentService : ITournamentService
         tournament.Participants.Add(player);
         await _tournamentRepository.UpdateAsync(tournament);
     }
+
+    public async Task WithdrawParticipantAsync(int tournamentId, int playerId)
+    {
+        var tournament = await _tournamentRepository.GetByIdAsync(tournamentId)
+            ?? throw new KeyNotFoundException("Tournament not found.");
+
+        var player = tournament.Participants.FirstOrDefault(p => p.Id == playerId)
+            ?? throw new KeyNotFoundException("Player not found in this tournament.");
+
+        tournament.Participants.Remove(player);
+        await _tournamentRepository.UpdateAsync(tournament);
+    }
 }
