@@ -71,6 +71,12 @@ app.MapGet("/players/{id}", async (int id, IPersonService service) =>
     return player is not null ? Results.Ok(player) : Results.NotFound();
 });
 
+app.MapGet("/players/{id}/tournaments", async (int id, IPersonService service) =>
+{
+    var tournaments = await service.ListPlayerTournaments(id);
+    return Results.Ok(tournaments);
+});
+
 app.MapGet("/tournaments", async (ITournamentService service) =>
 {
     return await service.ListAllTournamentsAsync();

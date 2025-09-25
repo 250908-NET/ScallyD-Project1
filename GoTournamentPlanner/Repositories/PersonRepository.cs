@@ -16,7 +16,7 @@ public class PersonRepository : IPersonRepository
 
     public async Task<Person?> GetByIdAsync(int id)
     {
-        return await _context.Persons.FindAsync(id);
+        return await _context.Persons.Include(p => p.ParticipatingIn).FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public async Task AddAsync(Person person)

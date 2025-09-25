@@ -21,4 +21,12 @@ public class PersonService : IPersonService
         await _personRepository.AddAsync(person);
         return person;
     }
+
+    public async Task<IEnumerable<Tournament>> ListPlayerTournaments(int playerId)
+    {
+        var player = await _personRepository.GetByIdAsync(playerId)
+            ?? throw new KeyNotFoundException("Player not found.");
+
+        return player.ParticipatingIn;
+    }
 }
