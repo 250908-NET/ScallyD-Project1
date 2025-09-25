@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 public class Person
@@ -8,6 +9,7 @@ public class Person
     public required Name Name { get; set; }
     public string? Email { get; set; }
     public Rank? Rank { get; set; }
+    [JsonIgnore]
     public List<Tournament> ParticipatingIn { get; set; } = [];
 }
 
