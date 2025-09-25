@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
+builder.Services.AddScoped<ITournamentService, TournamentService>();
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddOpenApi();
 
@@ -59,6 +61,11 @@ app.MapGet("/players/{id}", async (int id, IPersonService service) =>
 {
     var player = await service.GetPlayerProfileAsync(id);
     return player is not null ? Results.Ok(player) : Results.NotFound();
+});
+
+app.MapGet("/tournaments", async (ITournamentService service) =>
+{
+    return await service.ListAllTournamentsAsync();
 });
 
 app.Run();
