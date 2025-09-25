@@ -28,6 +28,40 @@ public class TournamentRepositoryTests : TestBase
     }
 
     [Fact]
+    public async Task GetByIdAsync_GivenValidId_ShouldReturnTournament()
+    {
+        // Arrange
+        await SeedDataAsync();
+
+        // Act
+        var result = await _repository.GetByIdAsync(2);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(2, result.Id);
+        Assert.Equal("Summer Open 2020", result.Name);
+        Assert.Equal("Washington, D.C.", result.Location);
+        Assert.Equal(new DateOnly(2020, 6, 20), result.StartDate);
+        Assert.Equal(new DateOnly(2020, 6, 22), result.EndDate);
+        Assert.Equal(Ruleset.Japanese, result.Ruleset);
+        Assert.Equal("Randomlastname", result.Organizer.Name.Family);
+    }
+
+    [Fact]
+    public async Task GetByIdAsync_GivenInvalidId_ShouldReturnNull()
+    {
+        // Arrange
+        await SeedDataAsync();
+        int invalidId = 999;
+
+        // Act
+        var result = await _repository.GetByIdAsync(invalidId);
+
+        // Assert
+        Assert.Null(result);
+    }
+
+    [Fact]
     public async Task AddAsync_ShouldCreateTournament()
     {
         // Arrange
