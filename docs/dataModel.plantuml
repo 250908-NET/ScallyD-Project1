@@ -1,0 +1,33 @@
+@startuml
+
+entity Person {
+    ID <<PK>>
+    Name
+    Email
+    Rank
+}
+
+entity Tournament {
+    ID <<PK>>
+    Name
+    Location
+    StartDate
+    EndDate
+    Ruleset
+    ' TimeSetting
+    Organizer <<FK>>
+    Participants <<FK>>
+}
+
+entity TournamentParticipant {
+    Tournament <<FK>>
+    Person <<FK>>
+    ' Ranking
+}
+
+TournamentParticipant }o--|| Tournament
+TournamentParticipant }o--|| Person
+
+Person ||--o{ Tournament : "organizes"
+
+@enduml
