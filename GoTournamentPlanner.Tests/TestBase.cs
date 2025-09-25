@@ -1,3 +1,5 @@
+namespace GoTournamentPlanner.Tests;
+
 using Microsoft.EntityFrameworkCore;
 
 public class TestBase : IDisposable
