@@ -131,7 +131,7 @@ public class PersonRepositoryTests : TestBase
         Person existingPlayer = (await _repository.GetAllAsync()).First();
 
         // Act
-        await _repository.DeleteAsync(existingPlayer.Id);
+        await _repository.DeleteAsync(existingPlayer);
         var result = await _repository.GetByIdAsync(existingPlayer.Id);
 
         // Assert

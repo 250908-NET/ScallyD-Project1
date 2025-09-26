@@ -97,11 +97,12 @@ public class TournamentRepositoryTests : TestBase
     {
         // Arrange
         await SeedDataAsync();
-        Tournament existingTournament = (await _repository.GetAllAsync()).First();
+        var tournamentToDelete = await _repository.GetByIdAsync(1);
+        Assert.NotNull(tournamentToDelete);
 
         // Act
-        await _repository.DeleteAsync(existingTournament.Id);
-        var result = await _repository.GetByIdAsync(1);
+        await _repository.DeleteAsync(tournamentToDelete);
+        var result = await _repository.GetByIdAsync(tournamentToDelete.Id);
 
         // Assert
         Assert.Null(result);

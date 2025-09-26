@@ -31,13 +31,9 @@ public class PersonRepository : IPersonRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(Person person)
     {
-        var person = await _context.Persons.FindAsync(id);
-        if (person != null)
-        {
-            _context.Persons.Remove(person);
-            await _context.SaveChangesAsync();
-        }
+        _context.Persons.Remove(person);
+        await _context.SaveChangesAsync();
     }
 }

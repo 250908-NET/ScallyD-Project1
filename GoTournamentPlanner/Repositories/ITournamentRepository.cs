@@ -4,5 +4,5 @@ public interface ITournamentRepository
     Task<Tournament?> GetByIdAsync(int id);
     Task AddAsync(Tournament tournament);
     Task UpdateAsync(Tournament tournament);
-    Task DeleteAsync(int id);
+    Task DeleteAsync(Tournament tournament);
 }
