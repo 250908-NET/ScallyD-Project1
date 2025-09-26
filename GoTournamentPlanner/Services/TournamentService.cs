@@ -65,6 +65,9 @@ public class TournamentService : ITournamentService
 
         tournament.Participants.Add(player);
         await _tournamentRepository.UpdateAsync(tournament);
+
+        player.ParticipatingIn.Add(tournament);
+        await _personRepository.UpdateAsync(player);
     }
 
     public async Task WithdrawParticipantAsync(int tournamentId, int playerId)
@@ -77,5 +80,8 @@ public class TournamentService : ITournamentService
 
         tournament.Participants.Remove(player);
         await _tournamentRepository.UpdateAsync(tournament);
+
+        player.ParticipatingIn.Remove(tournament);
+        await _personRepository.UpdateAsync(player);
     }
 }
