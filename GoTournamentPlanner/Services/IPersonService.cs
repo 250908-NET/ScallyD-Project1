@@ -7,4 +7,6 @@ public interface IPersonService
     Task<Person> RegisterPlayerAsync(Person person);
 
     Task<IEnumerable<Tournament>> ListPlayerTournaments(int playerId);
+
+    Task RemovePlayerAsync(int playerId);
 }

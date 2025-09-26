@@ -29,4 +29,12 @@ public class PersonService : IPersonService
 
         return player.ParticipatingIn;
     }
+
+    public async Task RemovePlayerAsync(int playerId)
+    {
+        var player = await _personRepository.GetByIdAsync(playerId)
+            ?? throw new KeyNotFoundException("Player not found.");
+
+        await _personRepository.DeleteAsync(player);
+    }
 }

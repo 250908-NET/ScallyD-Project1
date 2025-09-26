@@ -71,6 +71,12 @@ app.MapGet("/players/{id}", async (int id, IPersonService service) =>
     return player is not null ? Results.Ok(player) : Results.NotFound();
 });
 
+app.MapDelete("/players/{id}", async (int id, IPersonService service) =>
+{
+    await service.RemovePlayerAsync(id);
+    return Results.Ok();
+});
+
 app.MapGet("/players/{id}/tournaments", async (int id, IPersonService service) =>
 {
     var tournaments = await service.ListPlayerTournaments(id);
