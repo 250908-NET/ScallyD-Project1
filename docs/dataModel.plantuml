@@ -2,34 +2,34 @@
 
 skinparam linetype ortho
 
-entity Person {
-    ID <<PK>>
-    Name
-    Email
-    Rank
+entity Persons {
+    ID : int <<PK>>
+    Name_Family : nvarchar
+    Name_Given : nvarchar
+    Name_IsGivenFirst : bit
+    Email : nvarchar
+    Rank : int
 }
 
-entity Tournament {
-    ID <<PK>>
-    Name
-    Location
-    StartDate
-    EndDate
-    Ruleset
-    ' TimeSetting
-    Organizer <<FK>>
-    Participants <<FK>>
+entity Tournaments {
+    ID : int <<PK>>
+    Name : nvarchar
+    Location : nvarchar
+    StartDate : date
+    EndDate : date
+    Ruleset : int
+    OrganizerId : int <<FK>>
 }
 
-entity TournamentParticipant {
-    Tournament <<FK>>
-    Person <<FK>>
-    ' Ranking
+entity TournamentParticipants {
+    ParticipantsId : int <<FK>>
+    PartipatingInId : int <<FK>>
+    ' Ranking : int
 }
 
-TournamentParticipant }o--|| Tournament
-TournamentParticipant }o--|| Person
+TournamentParticipants }o--|| Tournaments
+TournamentParticipants }o--|| Persons
 
-Person ||--o{ Tournament : "organizes"
+Persons ||--o{ Tournaments : "organizes"
 
 @enduml
