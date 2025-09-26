@@ -15,6 +15,7 @@ tournaments and their participants.
     tournament
   - PATCH: Change a tournament's name, location, start or end dates, ruleset, or
     organizer
+  - DELETE: Remove a tournament
 - `/tournaments/:id/participants`
   - GET: List all participants in a given tournament
   - POST: Add a participant to a tournament
@@ -26,6 +27,7 @@ tournaments and their participants.
 - `/players/:id`
   - GET: Get info (name, email, rank) on a given player
   - PATCH: Change a player's name, email, or rank
+  - DELETE: Remove a player
 - `/players/:id/tournaments`
   - GET: List all tournaments a given player has participated in (or will
     participate in)
