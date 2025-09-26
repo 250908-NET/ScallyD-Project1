@@ -84,4 +84,12 @@ public class TournamentService : ITournamentService
         player.ParticipatingIn.Remove(tournament);
         await _personRepository.UpdateAsync(player);
     }
+
+    public async Task RemoveTournamentAsync(int tournamentId)
+    {
+        var tournament = await _tournamentRepository.GetByIdAsync(tournamentId)
+            ?? throw new KeyNotFoundException("Tournament not found.");
+
+        await _tournamentRepository.DeleteAsync(tournament);
+    }
 }

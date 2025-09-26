@@ -11,4 +11,6 @@ public interface ITournamentService
     Task RegisterParticipantAsync(int tournamentId, int playerId);
 
     Task WithdrawParticipantAsync(int tournamentId, int playerId);
+
+    Task RemoveTournamentAsync(int tournamentId);
 }
