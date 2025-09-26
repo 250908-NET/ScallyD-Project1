@@ -91,4 +91,19 @@ public class TournamentRepositoryTests : TestBase
         Assert.Equal(Ruleset.Chinese, result.Ruleset);
         Assert.Equal(organizer.Id, result.Organizer.Id);
     }
+
+    [Fact]
+    public async Task DeleteAsync_ShouldDeleteTournament()
+    {
+        // Arrange
+        await SeedDataAsync();
+        Tournament existingTournament = (await _repository.GetAllAsync()).First();
+
+        // Act
+        await _repository.DeleteAsync(existingTournament.Id);
+        var result = await _repository.GetByIdAsync(1);
+
+        // Assert
+        Assert.Null(result);
+    }
 }
