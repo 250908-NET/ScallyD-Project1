@@ -122,4 +122,19 @@ public class PersonRepositoryTests : TestBase
         Assert.Equal("myemail@example.com", retrievedPlayer.Email);
         Assert.Null(retrievedPlayer.Rank);
     }
+
+    [Fact]
+    public async Task DeleteAsync_ShouldDeletePerson()
+    {
+        // Arrange
+        await SeedDataAsync();
+        Person existingPlayer = (await _repository.GetAllAsync()).First();
+
+        // Act
+        await _repository.DeleteAsync(existingPlayer.Id);
+        var result = await _repository.GetByIdAsync(existingPlayer.Id);
+
+        // Assert
+        Assert.Null(result);
+    }
 }
