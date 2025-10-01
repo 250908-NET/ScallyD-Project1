@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-string connectionString = File.ReadAllText("../connectionString.txt");
+string connectionString = File.ReadAllText("./connectionString.txt");
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -122,3 +122,5 @@ app.MapDelete("/tournaments/{tournamentId}/participants/{playerId}", async (int 
 });
 
 app.Run();
+
+public partial class Program { }
